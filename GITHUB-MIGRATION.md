@@ -4,7 +4,7 @@
 
 ## 只开发代码
 
-克隆仓库后安装 Node.js >=22.12，运行 `npm ci`、`npm test`、`npm run build` 和 `npm start`。此模式没有真实凭据或线上历史数据；公开创建链接入口关闭。
+克隆仓库后安装 Node.js >=22.12，依次运行 `npm ci`、`npm run build`、`npm test` 和 `npm start`。测试会校验构建产物的 CSP，因此先构建再测试。此模式没有真实凭据或线上历史数据；公开创建链接入口关闭。
 
 ## 完整恢复开发环境
 
