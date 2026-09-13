@@ -1,0 +1,14 @@
+node_modules/
+dist/
+data/
+.env
+.env.*
+tools/.workbench-profile
+data-migration/
+.data-migration-restore/
+*.tgz
+*.tar.gz
+*.age
+private/
+output/
+*decryption-key*

@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {score,questions} from '../shared/engine.mjs';
+test('rejects incomplete, invalid and forged answers',()=>{for(const v of [null,[],Array(18).fill(null),Array(18).fill(4),Array(18).fill(-1),Array(18).fill('0')])assert.throws(()=>score(v));});
+test('results are deterministic with normalized top three and bounded traits',()=>{for(let n=0;n<100;n++){const a=questions.map((_,i)=>(n*7+i*3+Math.floor(n/(i+1)))%4);const r=score(a);assert.deepEqual(r,score(a));assert.equal(r.top.length,3);assert.equal(r.top.reduce((s,x)=>s+x.percent,0),100);assert.ok(r.traits.every(v=>v>=0&&v<=100));}});
+test('different answer preferences produce diverse archetypes',()=>{const ids=new Set();for(let axis=0;axis<6;axis++){const a=questions.map(q=>{const i=q.options.findIndex(o=>o.axis===axis);return i<0?0:i;});ids.add(score(a).primary.id);}assert.ok(ids.size>=4);});

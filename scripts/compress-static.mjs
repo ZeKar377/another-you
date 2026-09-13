@@ -1,0 +1,2 @@
+import {readdir,readFile,writeFile} from 'node:fs/promises';import {brotliCompressSync,gzipSync} from 'node:zlib';
+async function compress(dir){for(const f of await readdir(dir,{withFileTypes:true})){const p=dir+'/'+f.name;if(f.isDirectory())await compress(p);else if(/\.(html|css|js)$/.test(p)){const bytes=await readFile(p);await writeFile(p+'.br',brotliCompressSync(bytes));await writeFile(p+'.gz',gzipSync(bytes));}}}await compress(new URL('../dist',import.meta.url).pathname);
